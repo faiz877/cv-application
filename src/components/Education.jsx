@@ -4,10 +4,10 @@ function Education() {
   const [eduList, setEduList] = useState([]);
   const [editIndex, setEditIndex] = useState(-1);
 
-  const [school, setSchool] = useState("School");
-  const [course, setCourse] = useState("Course");
-  const [startDate, setStartDate] = useState("Start Date");
-  const [endDate, setEndDate] = useState("End Date");
+  const course = "Course";
+  const startDate = "Start Date";
+  const endDate = "End Date";
+  const school = "School";
 
   const handleAdd = () => {
     const newEducation = {

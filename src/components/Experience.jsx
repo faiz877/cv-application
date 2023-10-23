@@ -3,13 +3,13 @@ import { useState } from "react";
 function Experience() {
   const [editIndex, setEditIndex] = useState(-1);
   const [expList, setExpList] = useState([]);
-  const [company, setCompany] = useState("Company");
-  const [position, setPosition] = useState("Position");
-  const [startDate, setStartDate] = useState("Start Date");
-  const [endDate, setEndDate] = useState("End Date");
-  const [workDesc, setWorkDesc] = useState(
-    "Some stuff about the work that you’ve done here. It would be good if you can include responsibilities and achievements, as well as the extra miles that you have done. Don’t make it too long, keep it short but meaningful. Maximum 10 lines."
-  );
+  
+  const company = "Company";
+  const position = "Position";
+  const startDate = "Start Date";
+  const endDate = "End Date";
+  const workDesc =
+    "Some stuff about the work that you’ve done here. It would be good if you can include responsibilities and achievements, as well as the extra miles that you have done. Don’t make it too long, keep it short but meaningful. Maximum 10 lines.";
 
   const handleEdit = (index) => {
     setEditIndex(index);
