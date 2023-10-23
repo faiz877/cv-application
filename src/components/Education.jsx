@@ -1,72 +1,93 @@
 import { useState } from "react";
 
 function Education() {
-  const [edit, setEdit] = useState(false);
+  const [eduList, setEduList] = useState([]);
+  const [editIndex, setEditIndex] = useState(-1);
+
   const [school, setSchool] = useState("School");
   const [course, setCourse] = useState("Course");
   const [startDate, setStartDate] = useState("Start Date");
   const [endDate, setEndDate] = useState("End Date");
 
   const handleAdd = () => {
-    setEdit(true);
+    const newEducation = {
+      school,
+      course,
+      startDate,
+      endDate,
+    };
+    setEduList([...eduList, newEducation]);
   };
+
+  const handleEditField = (e, index, field) => {
+    const updatedEduList = [...eduList];
+    updatedEduList[index][field] = e.target.value;
+    setEduList(updatedEduList);
+  };
+
+  const handleDelete = (index) => {
+    const updatedEduList = [...eduList];
+    updatedEduList.splice(index, 1);
+    setEduList(updatedEduList);
+  };
+
+  const handleEdit = (index) => {
+    setEditIndex(index);
+  };
+
   const handleSave = () => {
-    setEdit(false);
+    setEditIndex(-1);
   };
 
   const handleCancel = () => {
-    setEdit(false);
+    setEditIndex(-1);
   };
 
   return (
     <div>
       <h1>Education</h1>
-      <div>
-        {edit ? (
-          <input
-            type="text"
-            value={school}
-            onChange={(e) => setSchool(e.target.value)}
-          />
-        ) : (
-          school
-        )}
-        {edit ? (
-          <input
-            type="text"
-            value={course}
-            onChange={(e) => setCourse(e.target.value)}
-          />
-        ) : (
-          course
-        )}
-      </div>
-      <div>
-        {edit ? (
-          <input
-            type="text"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        ) : (
-          startDate
-        )}
-        {edit ? (
-          <input
-            type="text"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-        ) : (
-          endDate
-        )}
-      </div>
-      {edit ? (
-        <button onClick={handleSave}>Save</button>
-      ) : (
-        <button onClick={handleAdd}>Edit</button>
-      )}
-      {edit && <button onClick={handleCancel}>Cancel</button>}
+      {eduList.map((education, index) => (
+        <div key={index}>
+          {editIndex == index ? (
+            <div>
+              <input
+                type="text"
+                value={education.school}
+                onChange={(e) => handleEditField(e, index, "school")}
+              />
+              <input
+                type="text"
+                value={education.course}
+                onChange={(e) => handleEditField(e, index, "course")}
+              />
+              <input
+                type="text"
+                value={education.startDate}
+                onChange={(e) => handleEditField(e, index, "startDate")}
+              />
+              <input
+                type="text"
+                value={education.endDate}
+                onChange={(e) => handleEditField(e, index, "endDate")}
+              />
+              <button onClick={handleSave}>Save</button>
+              <button onClick={handleCancel}>Cancel</button>
+            </div>
+          ) : (
+            <div>
+              <p>
+                {education.school} • {education.course}
+              </p>
+              <p>
+                {education.startDate} - {education.endDate}
+              </p>
+              <button onClick={() => handleEdit(index)}>Edit</button>
+              <button onClick={() => handleDelete(index)}>Delete</button>
+            </div>
+          )}
+        </div>
+      ))}
+      <button onClick={handleAdd}>Add</button>
     </div>
   );
 }
