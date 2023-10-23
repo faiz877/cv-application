@@ -44,50 +44,83 @@ function Education() {
   };
 
   return (
-    <div>
-      <h1>Education</h1>
+    <div className="py-4">
+      <h1 className="text-2xl font-bold mb-4">Education</h1>
       {eduList.map((education, index) => (
-        <div key={index}>
-          {editIndex == index ? (
+        <div key={index} className="mb-4 p-4 bg-white rounded shadow">
+          {editIndex === index ? (
             <div>
               <input
                 type="text"
                 value={education.school}
                 onChange={(e) => handleEditField(e, index, "school")}
+                className="mb-2 p-2 border rounded "
               />
               <input
                 type="text"
                 value={education.course}
                 onChange={(e) => handleEditField(e, index, "course")}
+                className="mb-2 p-2 border rounded "
               />
-              <input
-                type="text"
-                value={education.startDate}
-                onChange={(e) => handleEditField(e, index, "startDate")}
-              />
-              <input
-                type="text"
-                value={education.endDate}
-                onChange={(e) => handleEditField(e, index, "endDate")}
-              />
-              <button onClick={handleSave}>Save</button>
-              <button onClick={handleCancel}>Cancel</button>
+              <div className="flex mb-2">
+                <input
+                  type="text"
+                  value={education.startDate}
+                  onChange={(e) => handleEditField(e, index, "startDate")}
+                  className="p-2 border rounded flex-1 mr-2"
+                />
+                <input
+                  type="text"
+                  value={education.endDate}
+                  onChange={(e) => handleEditField(e, index, "endDate")}
+                  className="p-2 border rounded flex-1"
+                />
+              </div>
+              <button
+                onClick={handleSave}
+                className="bg-green-500 text-white p-2 rounded mr-2"
+              >
+                Save
+              </button>
+              <button
+                onClick={handleCancel}
+                className="bg-red-500 text-white p-2 rounded"
+              >
+                Cancel
+              </button>
             </div>
           ) : (
             <div>
-              <p>
+              <p className=" mb-2 text-xl font-thin">
                 {education.school} • {education.course}
               </p>
               <p>
                 {education.startDate} - {education.endDate}
               </p>
-              <button onClick={() => handleEdit(index)}>Edit</button>
-              <button onClick={() => handleDelete(index)}>Delete</button>
+              <div className="mt-4">
+                <button
+                  onClick={() => handleEdit(index)}
+                  className="bg-blue-500 text-white p-2 rounded mr-2"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="bg-red-500 text-white p-2 rounded"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           )}
         </div>
       ))}
-      <button onClick={handleAdd}>Add</button>
+      <button
+        onClick={handleAdd}
+        className="bg-blue-500 text-white p-2 rounded"
+      >
+        Add
+      </button>
     </div>
   );
 }

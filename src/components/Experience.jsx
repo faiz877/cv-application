@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa";
 
 function Experience() {
   const [editIndex, setEditIndex] = useState(-1);
   const [expList, setExpList] = useState([]);
-  
+
   const company = "Company";
   const position = "Position";
   const startDate = "Start Date";
@@ -47,57 +48,89 @@ function Experience() {
   };
 
   return (
-    <div>
-      <h1>Experience</h1>
+    <div className="py-4">
+      <h1 className="text-2xl font-bold mb-4">Experience</h1>
       {expList.map((experience, index) => (
-        <div key={index}>
+        <div key={index} className="mb-4 p-4 bg-white rounded shadow">
           {editIndex === index ? (
             <div>
               <input
                 type="text"
                 value={experience.company}
                 onChange={(e) => handleEditField(e, index, "company")}
+                className="mb-2 p-2 border rounded"
               />
               <input
                 type="text"
                 value={experience.position}
                 onChange={(e) => handleEditField(e, index, "position")}
+                className="mb-2 p-2 border rounded"
               />
               <input
                 type="text"
                 value={experience.startDate}
                 onChange={(e) => handleEditField(e, index, "startDate")}
+                className="mb-2 p-2 border rounded"
               />
               <input
                 type="text"
                 value={experience.endDate}
                 onChange={(e) => handleEditField(e, index, "endDate")}
+                className="mb-2 p-2 border rounded"
               />
               <input
                 type="text"
                 value={experience.workDesc}
                 onChange={(e) => handleEditField(e, index, "workDesc")}
+                className="mb-2 p-2 border rounded"
               />
-              <button onClick={handleSave}>Save</button>
-              <button onClick={handleCancel}>Cancel</button>
+              <button
+                onClick={handleSave}
+                className="bg-green-500 text-white p-2 rounded mr-2"
+              >
+                <FaSave />
+              </button>
+              <button
+                onClick={handleCancel}
+                className="bg-red-500 text-white p-2 rounded"
+              >
+                <FaTimes />
+              </button>
             </div>
           ) : (
             <div>
-              <p>
+              <p className="mb-2 p-2 text-xl font-thin">
                 {experience.company} • {experience.position}
               </p>
-              <p>
+              <p className="mb-2 p-2">
                 {experience.startDate} - {experience.endDate}
               </p>
-              <p>{experience.workDesc}</p>
-              <button onClick={() => handleEdit(index)}>Edit</button>
-              <button onClick={() => handleDelete(index)}>Delete</button>
+              <p className="mb-2 p-2">{experience.workDesc}</p>
+              <div className="mt-4">
+                <button
+                  onClick={() => handleEdit(index)}
+                  className="bg-blue-500 text-white p-2 rounded mr-2"
+                >
+                  <FaEdit />
+                </button>
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="bg-red-500 text-white p-2 rounded"
+                >
+                  <FaTrash />
+                </button>
+              </div>
             </div>
           )}
         </div>
       ))}
-      <div>
-        <button onClick={handleAdd}>Add</button>
+      <div className="mb-4">
+        <button
+          onClick={handleAdd}
+          className="bg-blue-500 text-white p-2 rounded"
+        >
+          Add
+        </button>
       </div>
     </div>
   );
